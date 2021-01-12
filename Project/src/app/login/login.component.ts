@@ -8,10 +8,9 @@ import {Location} from '@angular/common';
 })
 export class LoginComponent implements OnInit {
 
-  constructor( private location: Location )
-        {}
+  constructor(){}
 
   ngOnInit(): void {
-    this.location.replaceState("/app-login");
+    
   }
 }

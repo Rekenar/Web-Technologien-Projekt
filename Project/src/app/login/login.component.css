@@ -18,12 +18,6 @@ input:focus {
 fieldset{
     border:none;
 }
-.btn {
-    border-radius: 10px;
-    font-family: Arial;
-    font-size: 25px;
-    border-color: black;
-}
-.forgotPassword{
+.register{
     padding-left: 10px;
 }

@@ -22,6 +22,15 @@ app.get('/list', (req, res, next) => {
   })
 })
 
+app.delete('/spending/:position', (req, res) => {
+  db.query('DELETE FROM spending WHERE position = $1', [req.params.position], (err, resp) => {
+    if (err) {
+      res.sendStatus(500).send(next(err))
+    }
+    res.sendStatus(200)
+  })
+});
+
 app.listen(3000, () => {
   console.log("Server is listening on port 3000");
 })

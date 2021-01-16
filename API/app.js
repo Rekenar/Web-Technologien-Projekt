@@ -13,14 +13,23 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.get('/list', (req, res, next) => {
-  db.query('SELECT * FROM spending WHERE userid = $1', [3], (err, resp) => {
+app.get('/spending', (req, res, next) => {
+  db.query('SELECT * FROM spending WHERE accountid = $1', [3], (err, resp) => {
     if (err) {
       return next(err)
     }
     res.send(resp.rows)
   })
 })
+
+app.delete('/spending/:position', (req, res) => {
+  db.query('DELETE FROM spending WHERE position = $1', [req.params.position], (err, resp) => {
+    if (err) {
+      res.sendStatus(500).send(next(err))
+    }
+    res.status(200).send({ status: 'OK'});
+  })
+});
 
 app.listen(3000, () => {
   console.log("Server is listening on port 3000");

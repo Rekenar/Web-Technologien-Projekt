@@ -23,7 +23,17 @@ export class OverviewComponent implements OnInit,AfterViewInit {
   ngOnInit(){
     this.taskService.getList()
     .subscribe(list => this.dataSource.data = list);
-  }   
+  }
+
+  deleteEntry(position: Number){
+    console.log(position);
+    this.taskService.deleteEntry(position)
+    .subscribe((res:any) =>{
+      this.taskService.getList()
+    .subscribe(list => this.dataSource.data = list);
+    });
+    
+  }
 
   
   @ViewChild(MatPaginator) paginator: MatPaginator;

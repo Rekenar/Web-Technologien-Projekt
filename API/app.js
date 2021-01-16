@@ -14,7 +14,7 @@ app.use(function (req, res, next) {
 });
 
 app.get('/list', (req, res, next) => {
-  db.query('SELECT * FROM spending WHERE userid = $1', [3], (err, resp) => {
+  db.query('SELECT * FROM spending WHERE accountid = $1', [3], (err, resp) => {
     if (err) {
       return next(err)
     }

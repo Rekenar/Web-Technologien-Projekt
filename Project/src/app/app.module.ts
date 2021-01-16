@@ -16,7 +16,9 @@ import { OverviewComponent } from './overview/overview.component';
 import { HomeComponent } from './home/home.component'
 import {MatTableModule}from '@angular/material/table'
 import {MatSortModule}from '@angular/material/sort'
-import {MatPaginatorModule}from '@angular/material/paginator'
+import {MatPaginatorModule}from '@angular/material/paginator';
+import { HttpClientModule } from "@angular/common/http"
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import {MatPaginatorModule}from '@angular/material/paginator'
     RegisterComponent,
     StartComponent,
     OverviewComponent,
-    HomeComponent
+    HomeComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,11 @@ import {MatPaginatorModule}from '@angular/material/paginator'
     MatToolbarModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

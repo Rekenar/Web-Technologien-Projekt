@@ -21,13 +21,10 @@ export class OverviewComponent implements OnInit,AfterViewInit {
   }
 
   ngOnInit(){
-    this.getList();
-  }   
-
-  getList(){
     this.taskService.getList()
     .subscribe(list => this.dataSource.data = list);
-  }
+  }   
+
   
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -35,6 +32,5 @@ export class OverviewComponent implements OnInit,AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-
   }
 }

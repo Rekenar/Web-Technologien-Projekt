@@ -1,20 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser')
-
-let list = [{
-    position: 1,
-    name: "sandwich",
-    amount: 4,
-    type: "food",
-    date: "2020-08-20"
-  },{
-    position: 2,
-    name: "burger",
-    amount: 2,
-    type: "food",
-    date: "2020-04-21"
-  }]
+const db = require('../db')
 
 app.use(bodyParser.json());
 
@@ -26,8 +13,13 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.get('/list', (req, res) => {
-    res.send(list);
+app.get('/list', (req, res, next) => {
+  db.query('SELECT * FROM spending WHERE accountid = $1', [3], (err, resp) => {
+    if (err) {
+      return next(err)
+    }
+    res.send(resp.rows)
+  })
 })
 
 app.listen(3000, () => {

@@ -5,10 +5,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { List } from 'src/app/models/list.model';
 import { ActivatedRoute,Router } from '@angular/router';
 import { TaskService } from '../task.service'
-import { Observable } from 'rxjs';
-
-
-
 
 
 @Component({

@@ -3,8 +3,8 @@ import { MatSort } from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { List } from 'src/app/models/list.model';
-import { ActivatedRoute,Router } from '@angular/router';
 import { TaskService } from '../task.service'
+
 
 
 @Component({
@@ -14,25 +14,44 @@ import { TaskService } from '../task.service'
 })
 export class OverviewComponent implements OnInit,AfterViewInit {
 
-  list: List[];
+  position: number;
+
   displayedColumns: string[]= ['position', 'name', 'type', 'amount', 'date', 'delete'];
   dataSource = new MatTableDataSource<List>();
-  constructor(private taskService: TaskService, private route: ActivatedRoute, private router: Router) { 
+  constructor(private taskService: TaskService) { 
+    this.position = 0;
   }
 
   ngOnInit(){
+    this.getList()
+  }
+  getList(){
     this.taskService.getList()
-    .subscribe(list => this.dataSource.data = list);
+    .subscribe(list => 
+      this.dataSource.data = list
+      );
   }
 
   deleteEntry(position: Number){
     console.log(position);
     this.taskService.deleteEntry(position)
     .subscribe((res:any) =>{
-      this.taskService.getList()
-    .subscribe(list => this.dataSource.data = list);
+      this.getList()
     });
-    
+  }
+  addEntry(addname:String, addtype: String, addamount: Number, adddate: Date){
+    let list: List[];
+    const add ={
+      position: this.position,
+      name:addname, 
+      type: addtype, 
+      amount: addamount, 
+      date: adddate
+    };
+
+
+    list.push(add);
+    this.position++;
   }
 
   

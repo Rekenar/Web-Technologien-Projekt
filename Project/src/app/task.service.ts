@@ -16,10 +16,14 @@ export class TaskService {
 
 
   getList(): Observable<List[]> {
-    return this.http.get<List[]>(this.listUrl)
+    return this.http.get<List[]>(this.listUrl);
   }
 
-  deleteEntry(position:Number): Observable<List[]> {
-    return this.http.delete<List[]>(this.listUrl+'/'+position)
+  deleteEntry(position:Number) {
+    return this.http.delete(this.listUrl+'/'+position);
+  }
+  addEntry(list: List[]){
+
+    return this.http.post(this.listUrl, list);
   }
 }

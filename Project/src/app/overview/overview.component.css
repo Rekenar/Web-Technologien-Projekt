@@ -9,3 +9,7 @@ table {
 .change{
   padding-right: 15px;
 }
+
+mat-form-field{
+  padding-right: 10px;
+}

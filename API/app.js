@@ -27,11 +27,27 @@ app.delete('/spending/:position', (req, res) => {
     if (err) {
       res.sendStatus(500).send(next(err))
     }
-    res.status(200).send({ status: 'OK'});
+    res.status(200).send({ status: 'OK' });
   })
 });
 
+app.post('/spending', (req, res) => {
+  const accountid = req.body.accountid;
+  const name = req.body.name;
+  const amount = req.body.amount;
+  const type = req.body.type;
+  const date = req.body.date;
+  if (accountid == null || name == null || amount == null || type == null || date == null) {
+    res.sendStatus(500).send("Wrong body")
+  }
 
+  db.query('INSERT INTO spending(accountid, name, amount, type, date) VALUES($1, $2, $3, $4, $5)', [accountid, name, amount, type, date], (err, resp) => {
+    if (err) {
+      res.sendStatus(500).send(next(err))
+    }
+    res.status(200).send({ status: 'OK' });
+  })
+});
 
 app.listen(3000, () => {
   console.log("Server is listening on port 3000");

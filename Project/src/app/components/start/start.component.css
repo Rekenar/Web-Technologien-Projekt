@@ -9,3 +9,7 @@
 a{
     width: 100px;
 }
+.logout{
+    position: absolute;
+    right: 10px;
+}

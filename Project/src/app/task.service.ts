@@ -22,7 +22,7 @@ export class TaskService {
   deleteEntry(position:Number) {
     return this.http.delete(this.listUrl+'/'+position);
   }
-  addEntry(list: List[]){
+  addEntry(list: List){
 
     return this.http.post(this.listUrl, list);
   }

@@ -2,24 +2,18 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { StartComponent } from './start/start.component';
-import { OverviewComponent } from './overview/overview.component';
-import { HomeComponent } from './home/home.component'
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { StartComponent } from './components/start/start.component';
+import { OverviewComponent } from './components/overview/overview.component';
+import { HomeComponent } from './components/home/home.component'
 
-import { AppRoutingModule } from './app-routing.module'
+import { AppRoutingModule } from './core/app-routing.module'
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CustomMaterialModule } from "./core/material.module";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MatButtonModule } from '@angular/material/button'
-import { MatFormFieldModule } from '@angular/material/form-field'
-import { MatCardModule } from '@angular/material/card'
-import { MatInputModule } from '@angular/material/input'
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatTableModule }from '@angular/material/table'
-import { MatSortModule }from '@angular/material/sort'
-import { MatPaginatorModule }from '@angular/material/paginator'
 
 
 
@@ -30,21 +24,16 @@ import { MatPaginatorModule }from '@angular/material/paginator'
     RegisterComponent,
     StartComponent,
     OverviewComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatCardModule,
-    MatInputModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule
+    CustomMaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

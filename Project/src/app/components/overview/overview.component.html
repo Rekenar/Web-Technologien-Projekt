@@ -44,27 +44,29 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+  
 
-  <div class = "add">
-    <form ng-submit = "addEntry(nameInput, typeInput, amountInput, dateInput)" class="login-form">
+  <mat-card class = "add">
+    <form [formGroup] ="addEntryForm" (ngSubmit) = "addEntry()" class="login-form">
       <mat-form-field appearance="fill">
         <mat-label>Name</mat-label>
-        <input matInput name="nameInput" required type ="text">
+        <input matInput formControlName = "name" required type ="text">
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Type</mat-label>
-        <input matInput name="typeInput" required type ="text">
+        <input matInput formControlName = "type" required type ="text">
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Amount</mat-label>
-        <input matInput name="amountInput" required type ="number">
+        <input matInput formControlName = "amount" required type ="number">
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Date</mat-label>
-        <input matInput name="dateInput" required type ="date">
+        <input matInput formControlName = "date" required type ="date">
       </mat-form-field>
       <button type="submit" mat-raised-button color="primary">add</button>
   </form>
-  </div>
+</mat-card>
+
+  <mat-paginator [pageSizeOptions]="[10,20]" showFirstLastButtons></mat-paginator>
 </div>

@@ -2,8 +2,9 @@ import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { List } from 'src/app/models/list.model';
-import { TaskService } from '../task.service'
+import { List } from '../../models/list.model';
+import { TaskService } from '../../task.service'
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 
 
@@ -14,12 +15,24 @@ import { TaskService } from '../task.service'
 })
 export class OverviewComponent implements OnInit,AfterViewInit {
 
-  position: number;
+  addEntryForm = new FormGroup({
+    name: new FormControl('',[
+      Validators.required
+    ]),
+    type: new FormControl('',[
+      Validators.required
+    ]),
+    amount: new FormControl('',[
+      Validators.required
+    ]),
+    date: new FormControl('',[
+      Validators.required
+    ]),
+  });
 
   displayedColumns: string[]= ['position', 'name', 'type', 'amount', 'date', 'delete'];
   dataSource = new MatTableDataSource<List>();
   constructor(private taskService: TaskService) { 
-    this.position = 0;
   }
 
   ngOnInit(){
@@ -33,25 +46,23 @@ export class OverviewComponent implements OnInit,AfterViewInit {
   }
 
   deleteEntry(position: Number){
-    console.log(position);
     this.taskService.deleteEntry(position)
     .subscribe((res:any) =>{
       this.getList()
     });
   }
-  addEntry(addname:String, addtype: String, addamount: Number, adddate: Date){
-    let list: List[];
+  addEntry(){
     const add ={
-      position: this.position,
-      name:addname, 
-      type: addtype, 
-      amount: addamount, 
-      date: adddate
+      "accountid":3,
+      "name":this.addEntryForm.value.name, 
+      "type": this.addEntryForm.value.type, 
+      "amount": this.addEntryForm.value.amount, 
+      "date": this.addEntryForm.value.date
     };
-
-
-    list.push(add);
-    this.position++;
+    console.log(add)
+    this.taskService.addEntry(add).subscribe((res:any) => 
+    this.getList()
+    );
   }
 
   

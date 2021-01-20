@@ -15,14 +15,11 @@ input:focus {
     border-radius: 30px;
     margin-top: 250px;
 }
-fieldset{
-    border:none;
-}
-.btn {
-    border-radius: 10px;
-    font-family: Arial;
-    font-size: 25px;
-    border-color: black;
+.register-card{
+    position: absolut;
+    margin-top: 15%;
+    margin-left: 43%;
+    margin-right: 43%;
 }
 .alreadyRegistered{
     padding-left: 10px;

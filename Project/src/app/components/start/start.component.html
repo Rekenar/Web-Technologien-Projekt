@@ -1,0 +1,13 @@
+<mat-toolbar  color="primary"  class="fixed-header">
+    <mat-toolbar-row>
+        <a  mat-button  (click) = "homeScreen()">Home</a>
+        <a  mat-button  (click) = "overviewScreen()">Overview</a>
+        <a class ="logout"  mat-button  routerLink = "/login">Logout</a>
+    </mat-toolbar-row>
+</mat-toolbar>
+<app-home *ngIf="display.home">
+
+</app-home>
+<app-overview *ngIf="display.overview">
+
+</app-overview>

@@ -8,16 +8,13 @@ input {
 input:focus {
     outline:none;
 }
-.login {
-    max-width: 300px;
-    margin: auto;
-    border-style: solid;
-    border-radius: 30px;
-    margin-top: 250px;
-}
-fieldset{
-    border:none;
-}
+
 .register{
     padding-left: 10px;
+}
+.login-card{
+    position: absolut;
+    margin-top: 15%;
+    margin-left: 43%;
+    margin-right: 45%;
 }

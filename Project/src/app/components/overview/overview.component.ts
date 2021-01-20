@@ -3,7 +3,7 @@ import { MatSort } from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { List } from '../../models/list.model';
-import { TaskService } from '../../task.service'
+import { TaskService } from '../../core/task.service'
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 

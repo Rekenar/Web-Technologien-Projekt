@@ -3,25 +3,28 @@ const app = express();
 const bodyParser = require('body-parser')
 const db = require('../db')
 const jwt = require('jsonwebtoken');
-const localStorage = require('localStorage')
+const LocalStorage = require('node-localstorage').LocalStorage,
+localStorage = new LocalStorage('./scratch');
 
 app.use(bodyParser.json());
 
 app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  res.setHeader("Access-Control-Allow-Headers", "content-type");
-  res.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS");
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, HEAD, OPTIONS, PUT, PATCH, DELETE");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token, x-refresh-token, _id");
+
   res.header(
-    'Access-Control-Expose-Headers',
-    'token'
-);
+      'Access-Control-Expose-Headers',
+      'x-access-token, x-refresh-token'
+  );
 
   next();
 });
+
 let id;
 let authenticate = (req, res, next) => {
   let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjozLCJpYXQiOjE2MTEzMzE0NTl9.1V-jD-7MkFsydusyp0JiQyO3JNVzUO5q26MsVDFqz6E";
+  console.log()
   // verify the JWT
   jwt.verify(token, "qwe1234", (err, decoded) => {
       if (err) {
@@ -84,7 +87,7 @@ app.post("/account", (req, res) => {
         let payload = {subject:resp.rows[0].accountid}
         let payloadid = resp.rows[0].accountid
         let token = jwt.sign(payload, "qwe1234")
-        res.status(200).send({token, payloadid})
+        res.status(200).header('x-access-token',token).send({token})
   
       }
       else{

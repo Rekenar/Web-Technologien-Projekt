@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser')
 const db = require('../db')
+const jwt = require('jsonwebtoken');
+const localStorage = require('localStorage')
 
 app.use(bodyParser.json());
 
@@ -10,11 +12,33 @@ app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Headers", "content-type");
   res.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS");
+  res.header(
+    'Access-Control-Expose-Headers',
+    'token'
+);
+
   next();
 });
+let id;
+let authenticate = (req, res, next) => {
+  let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjozLCJpYXQiOjE2MTEzMzE0NTl9.1V-jD-7MkFsydusyp0JiQyO3JNVzUO5q26MsVDFqz6E";
+  // verify the JWT
+  jwt.verify(token, "qwe1234", (err, decoded) => {
+      if (err) {
+          // there was an error
+          // jwt is invalid - * DO NOT AUTHENTICATE *
+          res.status(401).send(err);
+      } else {
+          // jwt is valid
+          console.log(decoded.subject)
+          id = decoded.subject;
+          next();
+      }
+  });
+}
 
-app.get('/spending', (req, res, next) => {
-  db.query('SELECT * FROM spending WHERE accountid = $1', [3], (err, resp) => {
+app.get('/spending', authenticate, (req, res, next) => {
+  db.query('SELECT * FROM spending WHERE accountid = $1', [id], (err, resp) => {
     if (err) {
       return next(err)
     }
@@ -48,6 +72,31 @@ app.post('/spending', (req, res) => {
     res.status(200).send({ status: 'OK' });
   })
 });
+
+app.post("/account", (req, res) => {
+  db.query("SELECT * FROM account WHERE username = $1", [req.body.username], (err, resp) =>{
+    if(err) {
+      return next(err)
+    }
+    try {
+      if(resp.rows[0].password == req.body.password){
+        console.log("Login successful")
+        let payload = {subject:resp.rows[0].accountid}
+        let payloadid = resp.rows[0].accountid
+        let token = jwt.sign(payload, "qwe1234")
+        res.status(200).send({token, payloadid})
+  
+      }
+      else{
+        return res.send(false)
+      }
+    } catch (error) {
+      console.log("Invalid")
+    }
+
+  })
+})
+
 
 app.listen(3000, () => {
   console.log("Server is listening on port 3000");

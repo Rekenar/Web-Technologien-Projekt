@@ -29,4 +29,8 @@ export class StartComponent implements OnInit {
       overview:true
     }
   }
+  loginScreen(){
+    localStorage.clear()
+    this.router.navigate(["/login"])
+  }
 }

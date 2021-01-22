@@ -4,14 +4,14 @@
 
   <mat-card-content>
     
-      <form [formGroup] = "logindata" (ngSubmit) = "login()">
+      <form [formGroup] = "logindata" (ngSubmit) = "loginProcess()">
 
           <mat-form-field>
-            <input  matInput formControlName = "username"  placeholder="Username"  type="username"  name="username"  required>
+            <input  matInput formControlName = "username"  placeholder="Username"  type="username"required>
           </mat-form-field>
           <br>
           <mat-form-field>
-            <input  matInput formControlName = "password"  placeholder="Password"  type="password"  type="password"  name="password"  required>
+            <input  matInput formControlName = "password"  placeholder="Password"  type="password"  type="password"required>
           </mat-form-field>
           <br>
           <button type = "submit" mat-raised-button color="primary">Login</button>

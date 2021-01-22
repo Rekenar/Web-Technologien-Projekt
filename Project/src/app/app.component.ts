@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, ElementRef } from '@angular/core';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,7 +8,6 @@ import { AfterViewInit, Component, ElementRef } from '@angular/core';
 export class AppComponent implements AfterViewInit {
   title = 'MySpendings';
   constructor(private elementRef:ElementRef){
-
   }
   ngAfterViewInit(){
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = "grey";

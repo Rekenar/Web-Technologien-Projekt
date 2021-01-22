@@ -38,6 +38,7 @@ export class OverviewComponent implements OnInit,AfterViewInit {
   ngOnInit(){
     this.getList()
   }
+  
   getList(){
     this.taskService.getList()
     .subscribe(list => 
@@ -60,7 +61,7 @@ export class OverviewComponent implements OnInit,AfterViewInit {
       "date": this.addEntryForm.value.date
     };
     console.log(add)
-    this.taskService.addEntry(add).subscribe((res:any) => 
+    this.taskService.addEntry(add, localStorage.getItem("payloadid")).subscribe((res:any) => 
     this.getList()
     );
   }

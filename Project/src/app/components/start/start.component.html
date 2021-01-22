@@ -2,7 +2,7 @@
     <mat-toolbar-row>
         <a  mat-button  (click) = "homeScreen()">Home</a>
         <a  mat-button  (click) = "overviewScreen()">Overview</a>
-        <a class ="logout"  mat-button  routerLink = "/login">Logout</a>
+        <a class ="logout"  mat-button  (click) = "loginScreen()">Logout</a>
     </mat-toolbar-row>
 </mat-toolbar>
 <app-home *ngIf="display.home">

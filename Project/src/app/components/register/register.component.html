@@ -1,20 +1,20 @@
-<mat-card  class="register-card">
+<mat-card class="register-card">
 
   <mat-card-title>Register</mat-card-title>
 
   <mat-card-content>
-      <form  class="register-form">
+    <form [formGroup]="registerdata" (ngSubmit)="registerProcess()">
 
-          <mat-form-field>
-            <input  matInput  placeholder="Username" type="username"  name="username"  required>
-          </mat-form-field>
-          <br>
-          <mat-form-field>
-            <input  matInput  placeholder="Password" type="password"  type="password"  name="password"  required>
-          </mat-form-field>
-          <button type="submit" mat-raised-button   color="primary">Register</button>
-          <a class = "alreadyRegistered" routerLink ="/login" color="primary">Already registered?</a>
+      <mat-form-field>
+        <input matInput formControlName="username" placeholder="Username" type="username" required>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input matInput formControlName="password" placeholder="Password" type="password" required>
+      </mat-form-field>
+      <button type="submit" mat-raised-button color="primary">Register</button>
+      <a class="alreadyRegistered" routerLink="/login" color="primary">Already registered?</a>
 
-      </form>
+    </form>
   </mat-card-content>
 </mat-card>

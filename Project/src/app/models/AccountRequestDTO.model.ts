@@ -1,4 +1,4 @@
-export interface LoginRequestDTO{
+export interface AccountRequestDTO{
     username:string,
     password:string
   }

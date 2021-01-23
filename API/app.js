@@ -100,6 +100,35 @@ app.post("/account", (req, res) => {
   })
 })
 
+app.post('/register', (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+  if (username == null || password == null) {
+    return res.status(500).send("Wrong body")
+  }
+
+  // Check if user already exists
+  db.query('SELECT 1 FROM account WHERE username = $1', [username], (err, resp) => {
+    if (err) {
+      return res.status(500).send(err)
+    }
+
+    if (resp.rows && resp.rows.length > 0) {
+      return res.status(403).send("User already exists")
+    } else {
+      // User don't exists, insert into database
+      db.query('INSERT INTO account(username, password) VALUES($1, $2) RETURNING accountid', [username, password], (err, resp) => {
+        if (err) {
+          return res.status(500).send(err)
+        }
+        console.log("Register successful")
+        let payload = resp.rows[0].accountid
+        let token = jwt.sign(payload, "qwe1234")
+        res.status(200).header('x-access-token', token).send({ token })
+      })
+    }
+  })
+});
 
 app.listen(3000, () => {
   console.log("Server is listening on port 3000");

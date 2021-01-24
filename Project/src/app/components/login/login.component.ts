@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TaskService } from '../../core/task.service';
 import { Router } from "@angular/router"
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,16 @@ export class LoginComponent implements OnInit {
 
   logindata: FormGroup;
 
-  constructor(private accountservice:TaskService, private _router: Router){}
+  constructor(private accountservice:TaskService, private _router: Router, private breakpointObserver:BreakpointObserver){
+    breakpointObserver.observe([
+      Breakpoints.HandsetLandscape,
+      Breakpoints.HandsetPortrait
+    ]).subscribe(result => {
+      if (result.matches) {
+        
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.initForm();

@@ -13,3 +13,7 @@ table {
 mat-form-field{
   padding-right: 10px;
 }
+.allAmout{
+  text-align: right;
+  padding-right: 10px;
+}

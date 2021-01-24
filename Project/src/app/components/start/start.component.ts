@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router'
+import { TaskService } from 'src/app/core/task.service';
 
 @Component({
   selector: 'app-start',
@@ -9,11 +10,11 @@ import {Router} from '@angular/router'
 export class StartComponent implements OnInit {
   
   display = {
-    home: false,
+    home: true,
     overview:false
   }
 
-  constructor(private router:Router){}
+  constructor(private taskservice: TaskService, private router:Router){}
   
   ngOnInit(): void {
   }
@@ -30,7 +31,7 @@ export class StartComponent implements OnInit {
     }
   }
   loginScreen(){
-    localStorage.clear()
+    localStorage.clear();
     this.router.navigate(["/login"])
   }
 }

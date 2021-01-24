@@ -10,8 +10,7 @@ import { MatTableModule }from '@angular/material/table'
 import { MatSortModule }from '@angular/material/sort'
 import { MatPaginatorModule }from '@angular/material/paginator'
 import { MatIconModule} from '@angular/material/icon'
-import { MatSidenavModule} from '@angular/material/sidenav'
-
+import { MatTabsModule} from '@angular/material/tabs'
 
 @NgModule({
     imports: [
@@ -25,7 +24,7 @@ import { MatSidenavModule} from '@angular/material/sidenav'
         MatTableModule,
         MatSortModule,
         MatPaginatorModule,
-        MatSidenavModule
+        MatTabsModule
     ],
     exports: [
             CommonModule,
@@ -38,7 +37,7 @@ import { MatSidenavModule} from '@angular/material/sidenav'
             MatSortModule,
             MatPaginatorModule,
             MatIconModule,
-            MatSidenavModule
+            MatTabsModule
         ]
 })
 

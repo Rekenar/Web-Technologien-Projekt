@@ -1,6 +1,6 @@
 export interface List{
-    name: String;
-    amount: Number;
-    type: String;
+    name: string;
+    amount: number;
+    type: string;
     date: Date;
 }

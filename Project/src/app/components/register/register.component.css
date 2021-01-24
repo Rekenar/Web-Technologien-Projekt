@@ -15,12 +15,25 @@ input:focus {
     border-radius: 30px;
     margin-top: 250px;
 }
+.titleregister {
+    padding-left:14%;
+    text-align: left;
+}
+
 .register-card{
-    position: absolut;
+    text-align: center;
+    height:220px;
+    width:220px;
     margin-top: 15%;
-    margin-left: 43%;
-    margin-right: 43%;
+    margin-left: 44%;
 }
 .alreadyRegistered{
     padding-left: 10px;
+}
+
+@media(max-width: 600px){
+    .register-card{
+    margin-top: 15%;
+    margin-left: 25%;
+    }
 }

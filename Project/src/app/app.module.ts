@@ -7,14 +7,13 @@ import { RegisterComponent } from './components/register/register.component';
 import { StartComponent } from './components/start/start.component';
 import { OverviewComponent } from './components/overview/overview.component';
 import { HomeComponent } from './components/home/home.component'
+import { TabsComponent } from './components/tabs/tabs.component';
 
 import { AppRoutingModule } from './core/app-routing.module'
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomMaterialModule } from "./core/material.module";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-
 
 
 @NgModule({
@@ -25,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     StartComponent,
     OverviewComponent,
     HomeComponent,
+    TabsComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +33,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     CustomMaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

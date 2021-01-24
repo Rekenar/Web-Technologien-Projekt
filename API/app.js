@@ -21,7 +21,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-let id;
+/**let id;
 let authenticate = (req, res, next) => {
   let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjozLCJpYXQiOjE2MTEzMzE0NTl9.1V-jD-7MkFsydusyp0JiQyO3JNVzUO5q26MsVDFqz6E";
   console.log()
@@ -38,9 +38,25 @@ let authenticate = (req, res, next) => {
           next();
       }
   });
-}
-
-app.get('/spending', authenticate, (req, res, next) => {
+}**/
+app.post("/jwt", (req,res) =>{
+  let token = req.body.token;
+  // verify the JWT
+  jwt.verify(token, "qwe1234", (err, decoded) => {
+      if (err) {
+          // there was an error
+          // jwt is invalid - * DO NOT AUTHENTICATE *
+          res.status(401).send(err);
+      } else {
+          // jwt is valid
+          console.log(decoded.subject)
+          id = decoded.subject;
+          res.status(200).send({id});
+      }
+  });
+})
+id=3;
+app.get('/spending', (req, res, next) => {
   db.query('SELECT * FROM spending WHERE accountid = $1', [id], (err, resp) => {
     if (err) {
       return next(err)
@@ -85,7 +101,6 @@ app.post("/account", (req, res) => {
       if(resp.rows[0].password == req.body.password){
         console.log("Login successful")
         let payload = {subject:resp.rows[0].accountid}
-        let payloadid = resp.rows[0].accountid
         let token = jwt.sign(payload, "qwe1234")
         res.status(200).header('x-access-token',token).send({token})
   

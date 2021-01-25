@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { List } from '../../models/list.model';
 import { TaskService } from '../../core/task.service'
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { OverallComponent } from '../overall/overall.component';
 
 
 
@@ -32,7 +33,7 @@ export class OverviewComponent implements OnInit,AfterViewInit {
 
   displayedColumns: string[]= ['position', 'name', 'type', 'amount', 'date', 'delete'];
   dataSource = new MatTableDataSource<List>();
-  constructor(private taskService: TaskService) { 
+  constructor( private taskService: TaskService) { 
   }
 
   ngOnInit(){
@@ -54,7 +55,6 @@ export class OverviewComponent implements OnInit,AfterViewInit {
   }
   addEntry(){
     const add ={
-      "accountid":3,
       "name":this.addEntryForm.value.name, 
       "type": this.addEntryForm.value.type, 
       "amount": this.addEntryForm.value.amount, 

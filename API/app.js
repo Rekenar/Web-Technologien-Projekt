@@ -3,8 +3,6 @@ const app = express();
 const bodyParser = require('body-parser')
 const db = require('../db')
 const jwt = require('jsonwebtoken');
-const LocalStorage = require('node-localstorage').LocalStorage,
-localStorage = new LocalStorage('./scratch');
 
 app.use(bodyParser.json());
 
@@ -21,49 +19,41 @@ app.use(function (req, res, next) {
   next();
 });
 
-/**let id;
-let authenticate = (req, res, next) => {
-  let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjozLCJpYXQiOjE2MTEzMzE0NTl9.1V-jD-7MkFsydusyp0JiQyO3JNVzUO5q26MsVDFqz6E";
-  console.log()
-  // verify the JWT
-  jwt.verify(token, "qwe1234", (err, decoded) => {
+  app.post('/spending', (req, res, next) => {
+    let token = req.body.token;
+    jwt.verify(token, "qwe1234", (err, decoded) => {
       if (err) {
-          // there was an error
-          // jwt is invalid - * DO NOT AUTHENTICATE *
           res.status(401).send(err);
       } else {
-          // jwt is valid
-          console.log(decoded.subject)
           id = decoded.subject;
-          next();
-      }
+          db.query('SELECT * FROM spending WHERE accountid = $1', [id], (err, resp) => {
+            if (err) {
+              return next(err)
+            }
+            res.send(resp.rows)
+          })
+      } 
+    });
   });
-}**/
-app.post("/jwt", (req,res) =>{
-  let token = req.body.token;
-  // verify the JWT
-  jwt.verify(token, "qwe1234", (err, decoded) => {
+
+  app.post('/spending/overall', (req, res, next) => {
+    let token = req.body.token;
+    console.log(1)
+    jwt.verify(token, "qwe1234", (err, decoded) => {
       if (err) {
-          // there was an error
-          // jwt is invalid - * DO NOT AUTHENTICATE *
           res.status(401).send(err);
       } else {
-          // jwt is valid
-          console.log(decoded.subject)
           id = decoded.subject;
-          res.status(200).send({id});
-      }
+          db.query('SELECT SUM(amount) FROM spending WHERE accountid = $1', [id], (err, resp) => {
+            if (err) {
+              return next(err)
+            }
+            console.log(resp.rows)
+            res.send(resp.rows)
+          })
+      } 
+    });
   });
-})
-id=3;
-app.get('/spending', (req, res, next) => {
-  db.query('SELECT * FROM spending WHERE accountid = $1', [id], (err, resp) => {
-    if (err) {
-      return next(err)
-    }
-    res.send(resp.rows)
-  })
-})
 
 app.delete('/spending/:position', (req, res) => {
   db.query('DELETE FROM spending WHERE position = $1', [req.params.position], (err, resp) => {
@@ -74,8 +64,8 @@ app.delete('/spending/:position', (req, res) => {
   })
 });
 
-app.post('/spending', (req, res) => {
-  const accountid = req.body.accountid;
+app.post('/spending/add', (req, res) => {
+  const accountid =id;
   const name = req.body.name;
   const amount = req.body.amount;
   const type = req.body.type;
@@ -144,6 +134,7 @@ app.post('/register', (req, res) => {
     }
   })
 });
+
 
 app.listen(3000, () => {
   console.log("Server is listening on port 3000");

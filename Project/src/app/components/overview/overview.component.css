@@ -1,0 +1,19 @@
+table {
+    width: 100%;
+}
+.add{
+  padding-left: 15px;
+  padding-bottom: 15px;
+}
+
+.change{
+  padding-right: 15px;
+}
+
+mat-form-field{
+  padding-right: 10px;
+}
+.allAmout{
+  text-align: right;
+  padding-right: 10px;
+}

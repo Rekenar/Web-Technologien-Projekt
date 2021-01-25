@@ -1,22 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import {AppRoutingModule} from './app-routing.module'
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { StartComponent } from './start/start.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule } from '@angular/material/button'
-import {MatFormFieldModule } from '@angular/material/form-field'
-import {MatCardModule } from '@angular/material/card'
-import {MatInputModule } from '@angular/material/input'
-import {MatToolbarModule } from '@angular/material/toolbar';
-import { OverviewComponent } from './overview/overview.component';
-import { HomeComponent } from './home/home.component'
-import {MatTableModule}from '@angular/material/table'
-import {MatSortModule}from '@angular/material/sort'
-import {MatPaginatorModule}from '@angular/material/paginator'
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { StartComponent } from './components/start/start.component';
+import { OverviewComponent } from './components/overview/overview.component';
+import { HomeComponent } from './components/home/home.component'
+import { TabsComponent } from './components/tabs/tabs.component';
+import { OverallComponent } from './components/overall/overall.component';
+
+import { AppRoutingModule } from './core/app-routing.module'
+import { CustomMaterialModule } from "./core/material.module";
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -25,20 +27,18 @@ import {MatPaginatorModule}from '@angular/material/paginator'
     RegisterComponent,
     StartComponent,
     OverviewComponent,
-    HomeComponent
+    HomeComponent,
+    TabsComponent,
+    OverallComponent,
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatCardModule,
-    MatInputModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule
+    CustomMaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

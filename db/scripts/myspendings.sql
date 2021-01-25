@@ -8,9 +8,6 @@ CREATE TABLE public.account
     password varchar(100) NOT NULL
 );
 
-INSERT INTO public.account (accountid, username, password) VALUES (1, 'rekenaar', '1234');
-INSERT INTO public.account (accountid, username, password) VALUES (2, 'wrdlprmpf', '1234');
-INSERT INTO public.account (accountid, username, password) VALUES (3, 'ly0306', '1234');
 SELECT setval('account_accountid_seq', 3, true);
 
 CREATE TABLE public.spending
@@ -23,6 +20,4 @@ CREATE TABLE public.spending
     date date NOT NULL
 );
 
-INSERT INTO public.spending ("position", accountid, name, amount, type, date) VALUES (1, 3, 'sandwich', 4, 'food', '2020-08-20');
-INSERT INTO public.spending ("position", accountid, name, amount, type, date) VALUES (2, 3, 'burger', 2, 'food', '2020-04-21');
 SELECT setval('spending_position_seq', 2, true);

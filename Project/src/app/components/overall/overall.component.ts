@@ -27,4 +27,7 @@ export class OverallComponent implements OnInit{
       }, 0);
     });
   }
+  getTotal(){
+    return this.sumObject !== null && this.sumObject !== undefined;
+  }
 }

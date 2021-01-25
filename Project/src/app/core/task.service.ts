@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { List } from '../models/list.model';
 import { AccountRequestDTO } from '../models/AccountRequestDTO.model';
-import { Total } from '../models/total.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,11 +26,11 @@ export class TaskService {
     return this.http.post<List[]>(this.listUrl, x)
   }
 
-  getOverall(): Observable<List[]> {
+  getOverall(): Observable<string> {
     const x = {
       token: localStorage.getItem("token")
     }
-    return this.http.post<List[]>(this.overallUrl, x)
+    return this.http.post<string>(this.overallUrl, x)
   }
   deleteEntry(position:Number) {
     return this.http.delete(this.listUrl+'/'+position);

@@ -9,13 +9,7 @@ app.use(bodyParser.json());
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, POST, HEAD, OPTIONS, PUT, PATCH, DELETE");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token, x-refresh-token, _id");
-
-  res.header(
-      'Access-Control-Expose-Headers',
-      'x-access-token, x-refresh-token'
-  );
-
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,_id");
   next();
 });
 
@@ -38,7 +32,6 @@ app.use(function (req, res, next) {
 
   app.post('/spending/overall', (req, res, next) => {
     let token = req.body.token;
-    console.log(1)
     jwt.verify(token, "qwe1234", (err, decoded) => {
       if (err) {
           res.status(401).send(err);
@@ -48,7 +41,6 @@ app.use(function (req, res, next) {
             if (err) {
               return next(err)
             }
-            console.log(resp.rows)
             res.send(resp.rows)
           })
       } 
@@ -101,7 +93,6 @@ app.post("/account", (req, res) => {
     } catch (error) {
       console.log("Invalid")
     }
-
   })
 })
 
